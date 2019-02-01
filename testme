@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Donald Trump Button</title>
+
+    <!-- Insert all script and library links here -->
+
+    <!-- Google Fonts - Replace this with desired combination of fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styleswt.css">
+
+    <!-- JavaScript -->
+    <script type="text/javascript" src="app.js"></script>
+</head>
+<body>
+  <canvas id="myCanvas" width="1000" height="1000" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+    <!-- Write all your code below this line -->
+
+        <script>
+          var counter = 0;
+          var mousedownID = -1;  //Global ID of mouse down interval
+          var startHeightPosition = 0;
+          var startLengthPositon = 0;
+          var c = document.getElementById("myCanvas");
+          var ctx = c.getContext("2d");
+          function mousedown(event) {
+            if(mousedownID==-1)  //Prevent multimple loops!
+              mousedownID = setInterval(whilemousedown, 100 /*execute every 100ms*/);
+          }
+          function mouseup(event) {
+            if(mousedownID!=-1) {  //Only stop if exists
+
+              clearInterval(mousedownID);
+              //I put the draw over here even though it seems not to work....
+              ctx.clearRect(0, 0, 1200, 1500);
+              mousedownID=-1;
+              counter = 0;
+              startLengthPositon = 0;
+              startHeightPosition = 0;
+            }
+
+          }
+          function whilemousedown() {
+            <!-- right idea needs fix -->
+            if(counter % 3 ==0 )
+            {
+              startHeightPosition = startHeightPosition + 100;
+              startLengthPositon =0;
+            }
+            else {
+              startLengthPositon= startLengthPositon + 100;
+
+            }
+            ctx.rect(startHeightPosition, startLengthPositon, 100, 100);
+            ctx.fill("Black")
+            counter = counter + 1;
+}
+//Assign events
+document.addEventListener("mousedown", mousedown);
+document.addEventListener("mouseup", mouseup);
+//Also clear the interval when user leaves the window with mouse
+document.addEventListener("mouseout", mouseup);
+        </script>
+
+</body>
+</html>
+
+<!--
+function mouseDown() {
+  document.getElementById("myP").style.color = "red";
+}
+
+function mouseUp() {
+  document.getElementById("myP").style.color = "green";
+}
+-->
